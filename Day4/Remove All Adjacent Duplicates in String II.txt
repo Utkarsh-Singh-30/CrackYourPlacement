@@ -1,0 +1,24 @@
+class Solution {
+    public String removeDuplicates(String s, int k) {
+        Stack<int[]> st = new Stack<>();
+        for(int i=0;i<s.length();i++){
+            if(st.isEmpty()) st.push(new int[]{i,1});
+            else if(s.charAt(st.peek()[0])!=s.charAt(i)) st.push(new int[]{i,1});
+            else{
+                int val=st.pop()[1];
+                st.push(new int[]{i,val+1});
+            }
+            if(st.peek()[1]==k) st.pop();
+        }
+        String str="";
+        while(!st.isEmpty()){
+            int count=st.peek()[1];
+            char ch = s.charAt(st.pop()[0]);
+            while(count!=0){
+             str=ch+str;
+             count--;
+            }
+        }
+        return str;
+    }
+}

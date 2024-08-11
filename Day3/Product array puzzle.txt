@@ -1,0 +1,32 @@
+class Solution {
+    public static long[] productExceptSelf(int nums[]) {
+        // code here
+        int n =nums.length;
+        long[] p = new long[n];
+        long product=1;
+        long product2=1;
+        int count=0;
+        for(int i: nums){
+            if(i==0) count++;
+            product*=i;
+            if(i!=0) product2*=i;
+            else if(i==0 && count>1) product2*=i;
+        }
+        if(product==product2){
+        int k=0;
+        for(int i:nums){
+            if(i==0) p[k++]=product;
+            else p[k++]=product/i;
+        }
+        }
+        else{
+            int k=0;
+            for(int i:nums){
+                if(i==0)  p[k++]=product2;
+                else p[k++]=product/i;
+            }
+        }
+        return p;
+        
+    }
+}
