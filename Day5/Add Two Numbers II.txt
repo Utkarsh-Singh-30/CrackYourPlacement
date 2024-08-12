@@ -1,0 +1,86 @@
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        l1=reverseList(l1);
+        l2=reverseList(l2);
+        l1=addNumbers(l1,l2);
+        l1=reverseList(l1);
+        return l1;
+    }
+    public ListNode reverseList(ListNode head) {
+        ListNode prev=null, ahead=null;
+        while(head!=null){
+            ahead=head.next;
+            head.next=prev;
+            prev=head;
+            head=ahead;
+        }
+        head=prev;
+        prev=null;
+        return head;
+    }
+
+    public ListNode addNumbers(ListNode l1, ListNode l2) {
+        ListNode ans = new ListNode();
+        ListNode head=ans;
+        int carry=0;
+        int value=0;
+        while(l1!=null && l2!=null){
+            value=l1.val+l2.val+carry;
+            if(value<10){
+            ListNode newNode= new ListNode(value);
+                ans.next=newNode;
+                carry=0;
+            }
+            else{
+                int rem=value%10;
+                carry=value/10;
+                ListNode newNode= new ListNode(rem);
+                ans.next=newNode;
+            }
+            l1=l1.next;
+            l2=l2.next;
+            ans=ans.next;
+        }
+        if(l2==null){
+            while(l1!=null){
+                value=l1.val+carry;
+                if(value<10){
+                    ListNode newNode= new ListNode(value);
+                    ans.next=newNode;
+                    carry=0;
+                }
+                else{
+                    int rem=value%10;
+                    carry=value/10;
+                    ListNode newNode= new ListNode(rem);
+                    ans.next=newNode;
+                } 
+                l1=l1.next;
+                ans=ans.next; 
+            }
+        }
+        else{
+            while(l2!=null){
+                value=l2.val+carry;
+                if(value<10){
+                    ListNode newNode= new ListNode(value);
+                    ans.next=newNode;
+                    carry=0;
+                }
+                else{
+                    int rem=value%10;
+                    carry=value/10;
+                    ListNode newNode= new ListNode(rem);
+                    ans.next=newNode;
+                }
+                l2=l2.next;
+                ans=ans.next;   
+            }
+        }
+        if(carry!=0){
+            ListNode newNode= new ListNode(carry);
+            ans.next=newNode;
+        }
+        return head.next;
+    }
+}

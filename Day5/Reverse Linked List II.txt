@@ -1,0 +1,39 @@
+
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(head==null || head.next==null) return head;
+        ListNode temp=head;
+        if(left==1){
+            ListNode prev=null, ahead=null,curr=head;
+            int count=-1;
+            while(count!=right-1){
+                ahead=curr.next;
+                curr.next=prev;
+                prev=curr;
+                curr=ahead;
+                count++;
+            }
+            temp.next=curr;
+            return prev;
+        }
+        else{
+            int count=1;
+            while(count!=left-1){
+                temp=temp.next;
+                count++;
+            }
+            ListNode temp2=temp.next;
+            ListNode prev =temp2, ahead=temp2, curr=temp2.next;
+             while(count!=right-1){
+                ahead=curr.next;
+                curr.next=prev;
+                prev=curr;
+                curr=ahead;
+                count++;
+            }
+            temp2.next=curr;
+            temp.next=prev;
+            return head;
+        }
+    }
+}
