@@ -1,0 +1,15 @@
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int [][] dp = new int [m][n];
+        return totalWays(0,0,m-1,n-1,dp);
+    }
+    public int totalWays(int sr, int sc, int er, int ec,int[][] dp){
+        if(sr>er || sc>ec) return 0;
+        if(dp[sr][sc]!=0) return dp[sr][sc];
+        if(sr==er && sc==ec) return 1;
+
+        int ans= totalWays(sr,sc+1,er,ec,dp)+totalWays(sr+1,sc,er,ec,dp);
+        dp[sr][sc]=ans;
+        return ans;
+    }
+}
