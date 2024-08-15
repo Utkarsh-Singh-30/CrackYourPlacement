@@ -1,0 +1,31 @@
+class Solution {
+    Node compute(Node head) {
+        // your code here
+        head=reverse(head);
+        Node temp1=head;
+        Node temp2=head.next;
+        while(temp2!=null){
+            if(temp2.data>=temp1.data){
+                temp1.next=temp2;
+                temp1=temp1.next;
+            }
+            temp2=temp2.next;
+        }
+        temp1.next=null;
+        head=reverse(head);
+        return head;
+    }
+    
+    Node reverse(Node head){
+        Node ahead=null, prev= null;
+        
+        while(head!=null){
+            ahead=head.next;
+            head.next=prev;
+            prev=head;
+            head=ahead;
+        }
+        return prev;
+    }
+    
+}
