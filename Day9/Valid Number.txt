@@ -1,0 +1,26 @@
+class Solution {
+    public boolean isNumber(String s) {
+        boolean sign=false, dot=false, expo=false,digit=false;
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+
+            if(ch>=48 && ch<=57){
+                sign =true;
+                digit=true;
+            }
+            else if(ch=='.' && !dot && !(i==0 && i==s.length()-1 )){
+                dot= true;
+                sign =true;
+            }
+            else if(!sign && (ch=='+' || ch=='-' ) )  sign=true;
+            else if((i>0 && i<s.length()-1 && !expo) && (ch=='e' || ch=='E') && digit){
+                sign =false;
+                dot=true;
+                digit =false;
+                expo=true;
+            }
+            else return false;
+        }
+        return digit;
+    }
+}

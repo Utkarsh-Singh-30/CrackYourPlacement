@@ -1,0 +1,45 @@
+public class ImplementationStackAndQueueUsingDeque {
+        Deque<Integer> dq = new LinkedList<>();
+        public void AddLast(int x){
+            dq.addLast(x);
+            System.out.println(dq);
+        }
+
+        public int removeLast(){
+           return dq.removeLast();
+        }
+
+        public int removeFirst(){
+            return dq.removeFirst();
+        }
+        public int size(){
+            return dq.size();
+        }
+
+        static class Stacks{
+            ImplementationStackAndQueueUsingDeque ob = new ImplementationStackAndQueueUsingDeque();
+            public void push(int x){
+                ob.AddLast(x);
+
+            }
+            public int pop(){
+               return ob.removeLast();
+            }
+            public int size(){
+                return ob.size();
+            }
+        }
+        static class Queuee{
+            ImplementationStackAndQueueUsingDeque ob = new ImplementationStackAndQueueUsingDeque();
+
+            public void push(int x){
+                ob.AddLast(x);
+            }
+            public int pop(){
+                return ob.removeFirst();
+            }
+
+            public int size(){
+                return ob.size();
+            }
+        }

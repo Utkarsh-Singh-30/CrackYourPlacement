@@ -1,0 +1,54 @@
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int n = board.length;
+        int m = board[0].length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                char ch = board[i][j];
+                if (ch == word.charAt(0)) {
+                    if (isPresent(board, i, j, n, m, word, 0))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isPresent(char[][] board, int sr, int sc, int er, int ec, String word, int idx) {
+        if (idx == word.length() - 1)
+            return true;
+
+        boolean flag = false;
+        char ch = board[sr][sc];
+        board[sr][sc] = '1';
+        if (sc >= 0 && sc < ec && sr >= 0 && sr < er) {
+            if (sc + 1 < ec && (board[sr][sc + 1]) == (word.charAt(idx + 1)))
+                flag = isPresent(board, sr, sc + 1, er, ec, word, idx + 1);
+            if (flag) {
+                board[sr][sc] = ch;
+                return true;
+            }
+            if (sr + 1 < er && (board[sr + 1][sc]) == (word.charAt(idx + 1)))
+                flag = isPresent(board, sr + 1, sc, er, ec, word, idx + 1);
+            if (flag) {
+                board[sr][sc] = ch;
+                return true;
+            }
+            if (sr - 1 >= 0 && (board[sr - 1][sc]) == (word.charAt(idx + 1)))
+                flag = isPresent(board, sr - 1, sc, er, ec, word, idx + 1);
+            if (flag) {
+                board[sr][sc] = ch;
+                return true;
+            }
+            if (sc - 1 >= 0 && (board[sr][sc - 1]) == (word.charAt(idx + 1)))
+                flag = isPresent(board, sr, sc - 1, er, ec, word, idx + 1);
+            if (flag) {
+                board[sr][sc] = ch;
+                return true;
+            }
+        }
+
+        board[sr][sc] = ch;
+        return false;
+    }
+}

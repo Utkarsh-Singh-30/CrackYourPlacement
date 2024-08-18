@@ -1,0 +1,29 @@
+class Solution {
+    public int evalRPN(String[] arr) {
+        Stack<Integer> st = new Stack<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].length()>1) {
+                int num=Integer.parseInt(arr[i]);
+                st.push(num);
+            } 
+            else {
+                char ch = arr[i].charAt(0);
+                if (ch >= 48 && ch <= 57)
+                    st.push(ch - '0');
+                else if(st.size()>1){
+                    int val1 = st.pop();
+                    int val2 = st.pop();
+                    if (ch == '+')
+                        st.push(val2 + val1);
+                    else if (ch == '*')
+                        st.push(val2 * val1);
+                    else if (ch == '/')
+                        st.push(val2 / val1);
+                    else if (ch == '-')
+                        st.push(val2 - val1);
+                }
+            }
+        }
+        return st.peek();
+    }
+}
