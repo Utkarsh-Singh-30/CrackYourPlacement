@@ -1,0 +1,24 @@
+class Solution {
+    public int maxScore(int[] nums, int k) {
+        int max=0;
+        int []newarr= new int[2*k];
+        int l=0;
+        for(int i =k-1;i>=0;i--){
+            newarr[l++]=nums[i];
+        }
+        int n=nums.length-k;
+        for(int i=nums.length-1;i>=n;i--){
+            newarr[l++]=nums[i];
+        }
+
+
+        for(int i =0;i<newarr.length-k+1;i++){
+            int sum=0;
+            for(int j=i;j<=i+k-1;j++){
+                sum+=newarr[j];
+            }
+            max=Math.max(sum,max);
+        }
+        return max;
+    }
+}
